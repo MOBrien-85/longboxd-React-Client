@@ -6,6 +6,6 @@ export const Longboxd = () => (
     <>
         <NavBar />
         <ApplicationViews />
+        
     </>
 )
-
