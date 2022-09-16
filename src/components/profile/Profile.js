@@ -5,15 +5,15 @@ import { getSingleProfile } from "../../managers/ProfileManager"
 import { FaUserCircle } from 'react-icons/fa';
 import { getReviewsByUser } from "../../managers/ReviewManager";
 
-export const ProfileDetails = (userId) => {
-    const { profileId } = useParams()
-    const [profile, setProfile] = useState([])
-    const [reviews, setReviews] = useState([])
+export const ProfileDetails = () => {
+    const { userId } = useParams()
+    let { comicId } = useParams()
+    const currentUserId = parseInt(localStorage.getItem('user_id'))
+    const [profile, setProfile] = useState({})
 
     useEffect(() => {
-        getSingleProfile(profileId).then(data => setProfile(data))
-        getReviewsByUser(profileId).then(data => setReviews(data))
-    }, [profileId])
+        getSingleProfile(currentUserId).then(data => setProfile(data))
+    }, [])
 
     // const [newImg, setImg] = useState("")
 
@@ -45,7 +45,7 @@ export const ProfileDetails = (userId) => {
                     }
 
                 </header> */}
-                <div className="profile__fullName">{collector?.first_name} {collector?.last_name}</div>
+                <div className="profile__fullName">{profile?.user?.first_name} {profile?.user?.last_name}</div>
                 {/* <div className="profile__collectorname">{collector?.collectorname}</div>
                 <div className="profile__email">{collector?.email}</div> */}
                 {/* <div className="profile__creationDate">{profile.user?.date_joined}</div>
@@ -64,11 +64,11 @@ shadow and you can click it to go see the review details */}
                     <div>{profile.user?.first_name}'s Reviews</div>
                     <article className="reviews">
                         {
-                            reviews.map(review => {
+                            profile.reviews?.map(review => {
                                 return <section key={`review--${review.id}`} className="review">
                                     <div className="card">
                                         <header className="card-header is-justify-content-center">
-                                            {/* comic image */}
+                                            {review.review}
                                         </header>
                                         <footer>
                                             {/* star rating */}

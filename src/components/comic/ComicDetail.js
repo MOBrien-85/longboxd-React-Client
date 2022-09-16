@@ -19,7 +19,6 @@ import {
 } from "../../managers/ComicManager.js"
 import { getCreators } from "../../managers/CreatorManager.js"
 import { getCharacters } from "../../managers/CharacterManager.js"
-import { ReviewDetails } from "../review/ReviewDetail.js"
 import { getReviewsByUser } from "../../managers/ReviewManager.js"
 
 export const ComicDetail = () => {
@@ -118,18 +117,18 @@ export const ComicDetail = () => {
 
                     <div className="button_container">
                         {
-                            review.user != currentUserId 
+                            review.status
                             ?   <button className="write_review" onClick={
                                 () => {
-                                    navigate(`/reviewForm/${comic.id}`)
+                                    navigate(`/reviewupdate/${comic.id}/${review?.reviewId}`)
                                 }
-                                }>Write Review</button>
+                                }>Update Review</button>
                             :
                                 <button className="update_review" onClick={
                                 () => {
-                                    navigate(`/reviewupdate/${comic.id}`)
+                                    navigate(`/reviewform/${comic.id}`)
                                 }
-                                }>Update Review</button>
+                                }>Write Review</button>
                         }
                     </div>
                 </section>

@@ -6,8 +6,9 @@ import { Rating } from 'react-simple-star-rating'
 import { getSingleProfile } from "../../managers/ProfileManager"
 
 
-export const ReviewForm = () => {
-    let { comicId } = useParams()
+export const ReviewUpdate = () => {
+    let { comicId, reviewId } = useParams()
+    
     const navigate = useNavigate()
     const [comic, setComic] = useState([])
     // current user
@@ -33,8 +34,8 @@ export const ReviewForm = () => {
 
     useEffect(
         () => {
-            if (comicId != undefined) {
-                getReviewsById(comicId)
+            if (reviewId != undefined) {
+                getReviewsById(reviewId)
                     .then(res => setCurrentReview({
                         id: res.id,
                         review: res.review,
@@ -49,7 +50,7 @@ export const ReviewForm = () => {
                 })
             }
         },
-        [comicId]
+        [reviewId]
     )
 
     const changeReviewState = (domEvent) => {
@@ -92,21 +93,6 @@ export const ReviewForm = () => {
                     </label>
                 </div>
             </fieldset>
-            
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">R/V Parking?:</label>
-                    <input type="checkbox"
-                        value={review.rvParking}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...review }
-                                copy.rvParking = evt.target.checked
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset> */}
 
             <div className="reviewForm__button_container">
                 {comicId != undefined ? <button id="submit_updated_review"
@@ -123,7 +109,7 @@ export const ReviewForm = () => {
                             review.rating = review.rating / 20
                         }
                         updateReviewObj(review)
-                            .then(() => navigate(`/profile/${review.id}`))
+                            .then(() => navigate(`/profiles/${review.id}`))
                     }}>Save Changes</button>
                     :
 
@@ -139,7 +125,7 @@ export const ReviewForm = () => {
                             }
 
                             createReview(review)
-                                .then(() => navigate(`/profile/${currentUserId}`))
+                                .then(() => navigate(`/profiles/${currentUserId}`))
                         }}
                         className="btn btn-primary">Save</button>}
                 <div className="abortReview_button_container">

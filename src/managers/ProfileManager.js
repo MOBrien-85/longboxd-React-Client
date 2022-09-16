@@ -1,5 +1,5 @@
 export const getProfiles = () => {
-    return fetch("http://localhost:8000/profiles", {
+    return fetch("http://localhost:8000/collectors", {
         headers: {
             "Authorization": `Token ${localStorage.getItem("lb_token")}`
         }
@@ -8,7 +8,7 @@ export const getProfiles = () => {
 }
 
 export const getSingleProfile = (id) => {
-    return fetch(`http://localhost:8000/profiles/${id}`, {
+    return fetch(`http://localhost:8000/collectors/${id}`, {
         headers: {
             'Authorization': `Token ${localStorage.getItem('lb_token')}`
         }
@@ -17,7 +17,7 @@ export const getSingleProfile = (id) => {
 }
 
 export const editUserActive = (user) => {
-    return fetch(`http://localhost:8000/profiles/${user.id}/user_active`, {
+    return fetch(`http://localhost:8000/collectors/${user.id}/user_active`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("lb_token")}`,
@@ -28,7 +28,7 @@ export const editUserActive = (user) => {
 }
 
 export const editUserStatus = (user, status) => {
-    return fetch(`http://localhost:8000/profiles/${user.id}/user_status`, {
+    return fetch(`http://localhost:8000/collectors/${user.id}/user_status`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("lb_token")}`,

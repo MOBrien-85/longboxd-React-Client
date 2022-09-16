@@ -3,13 +3,16 @@ import "./NavBar.css"
 
 export const NavBar = () => {
     const navigate = useNavigate()
+    const currentUserId = parseInt(localStorage.getItem('lb_token'))
+
     return (
         <ul className="navbar">
             <li className="navbar__item">
-            <Link className="navbar__link" to="/comics">Comics</Link>
+            <Link className="navbar__link" to={`/profiles/${currentUserId}`}>Profile</Link>
             </li>
             <li className="navbar__item">
-                Navigation link
+            <Link className="navbar__link" to="/comics">Comics</Link>
+
             </li>
             <li className="navbar__item">
                 Navigation link

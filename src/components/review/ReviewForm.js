@@ -109,7 +109,7 @@ export const ReviewForm = () => {
             </fieldset> */}
 
             <div className="reviewForm__button_container">
-                {comicId != undefined ? <button id="submit_updated_review"
+                {/* {comicId != undefined ? <button id="submit_updated_review"
                     onClick={evt => {
                         evt.preventDefault()
                         const review = {
@@ -125,7 +125,7 @@ export const ReviewForm = () => {
                         updateReviewObj(review)
                             .then(() => navigate(`/profile/${review.id}`))
                     }}>Save Changes</button>
-                    :
+                    : */}
 
                     <button type="submit" id="submit_new_review"
                         onClick={evt => {
@@ -141,7 +141,8 @@ export const ReviewForm = () => {
                             createReview(review)
                                 .then(() => navigate(`/profile/${currentUserId}`))
                         }}
-                        className="btn btn-primary">Save</button>}
+                        className="btn btn-primary">Submit</button>
+                        {/* } */}
                 <div className="abortReview_button_container">
                     <button id="abort_review" onClick={() => navigate(`/comics/${comic.id}`)}>
                         Back to Comic

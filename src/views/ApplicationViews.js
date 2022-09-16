@@ -7,6 +7,7 @@ import { ReviewForm } from "../components/review/ReviewForm"
 import { ComicDetail } from "../components/comic/ComicDetail"
 import { ReviewDetails } from "../components/review/ReviewDetail"
 import { ProfileDetails } from "../components/profile/Profile"
+import { ReviewUpdate } from "../components/review/ReviewUpdate"
 
 export const ApplicationViews = () => {
     return <>
@@ -19,12 +20,11 @@ export const ApplicationViews = () => {
                 <Route path="/comics/:comicId" element={<ComicDetail />} />
 
                 <Route path="/reviewform/:comicId" element={<ReviewForm />} />
-                <Route path="/reviewform/:reviewId" element={<ReviewForm />} />
                 <Route path="/reviewdetails/:reviewId" element={<ReviewDetails />} />
-                <Route path="/reviewupdate/:comicId" element={<ReviewForm />} />
+                <Route path="/reviewupdate/:comicId/:reviewId" element={<ReviewUpdate />} />
 
-                
-                <Route path="/profiles/:profileId" element={<ProfileDetails />} />
+
+                <Route path="/profiles/:userId" element={<ProfileDetails />} />
 
             </Route>
         </Routes>
