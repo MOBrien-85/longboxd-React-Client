@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from 'react-router-dom'
-import { createReview, getReviewsByUser, updateReviewObj } from '../../managers/ReviewManager'
+import { createReview, getReviewsById, updateReviewObj } from '../../managers/ReviewManager'
 import { getComics } from "../../managers/ComicManager.js"
 import { Rating } from 'react-simple-star-rating'
 import { getSingleProfile } from "../../managers/ProfileManager"
@@ -34,7 +34,7 @@ export const ReviewForm = () => {
     useEffect(
         () => {
             if (comicId != undefined) {
-                getReviewsByUser({comic: comicId})
+                getReviewsById(comicId)
                     .then(res => setCurrentReview({
                         id: res.id,
                         review: res.review,

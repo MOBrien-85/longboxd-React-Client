@@ -12,17 +12,32 @@
 // ***make them links to the character detail page
 
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { getComicById } from "../../managers/ComicManager.js"
-
+import { useNavigate, useParams } from "react-router-dom"
+import {
+    addComicToCollection, getComicById, getComics, addComicToWishlist,
+    removeComicFromCollection, removeComicFromWishlist
+} from "../../managers/ComicManager.js"
+import { getCreators } from "../../managers/CreatorManager.js"
+import { getCharacters } from "../../managers/CharacterManager.js"
+import { ReviewDetails } from "../review/ReviewDetail.js"
+import { getReviewsByUser } from "../../managers/ReviewManager.js"
 
 export const ComicDetail = () => {
     let { comicId } = useParams()
+    const navigate = useNavigate()
     const [comic, setComic] = useState([])
     const [creators, setCreators] = useState([])
+    const [characters, setCharacters] = useState([])
+    const [collection, setCollection] = useState([])
+    const [wishlist, setWishlist] = useState([])
+    const [review, setReviewDetails] = useState([])
+    const currentUserId = parseInt(localStorage.getItem('user_id'))
 
     useEffect(() => {
         getComicById(comicId).then(data => setComic(data))
+        getCreators().then(data => setCreators(data))
+        getCharacters().then(data => setCharacters(data))
+        getReviewsByUser({comic: comicId}).then(data => setReviewDetails(data))
     }, [comicId])
 
 
@@ -37,7 +52,7 @@ export const ComicDetail = () => {
                 {/* make this a link to the creator page when that component is read */}
                 <div className="comic__creators">
                     <ul>Creators:
-                        {comic.credits.map((credit, index) => (
+                        {comic.credits?.map((credit, index) => (
                             <li key={index}>
                                 <h4>{credit.name}</h4>
                             </li>
@@ -53,7 +68,7 @@ export const ComicDetail = () => {
                 <div className="comic__synopsis">{comic.synopsis}</div>
                 <div className="comic__characters">
                     <ul>Featuring:
-                        {comic.characters.map((character, index) => (
+                        {comic.characters?.map((character, index) => (
                             <li key={index}>
                                 <h4>{character.name}</h4>
                             </li>
@@ -61,6 +76,63 @@ export const ComicDetail = () => {
                         )}
                     </ul>
                 </div>
+                <section>
+                    {collection.inCollection ? (
+                        <button
+                            onClick={() =>
+                                removeComicFromCollection(comic).then(getComics).then(setCollection)
+                            }
+                        >
+                            {/* these add and remove buttons i want to replace with icons and 
+                        then add this text as a hover */}
+                            Remove from Collection
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() =>
+                                addComicToCollection(comic).then(getComics).then(setCollection)
+                            }
+                        >
+                            Add to Collection
+                        </button>
+                    )}
+                    {wishlist.joined ? (
+                        <button
+                            onClick={() =>
+                                removeComicFromWishlist(comic).then(getComics).then(setWishlist)
+                            }
+                        >
+                            {/* these add and remove buttons i want to replace with icons and 
+                        then add this text as a hover */}
+                            Remove from Wishlist
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() =>
+                                addComicToWishlist(comic).then(getComics).then(setWishlist)
+                            }
+                        >
+                            Add to Wishlist
+                        </button>
+                    )}
+
+                    <div className="button_container">
+                        {
+                            review.user != currentUserId 
+                            ?   <button className="write_review" onClick={
+                                () => {
+                                    navigate(`/reviewForm/${comic.id}`)
+                                }
+                                }>Write Review</button>
+                            :
+                                <button className="update_review" onClick={
+                                () => {
+                                    navigate(`/reviewupdate/${comic.id}`)
+                                }
+                                }>Update Review</button>
+                        }
+                    </div>
+                </section>
             </section>
 
         </article>
