@@ -11,7 +11,7 @@ export const ReviewForm = () => {
     const navigate = useNavigate()
     const [comic, setComic] = useState([])
     // current user
-    const currentUserId = parseInt(localStorage.getItem('user_id'))
+    let userId = localStorage.getItem('userId')
     const [profile, setProfile] = useState({})
 
     const [currentReview, setCurrentReview] = useState({
@@ -28,7 +28,7 @@ export const ReviewForm = () => {
 
     useEffect(() => {
         getComics().then(data => setComic(data))
-        getSingleProfile(currentUserId).then(data => setProfile(data))
+        getSingleProfile(userId).then(data => setProfile(data))
     }, [])
 
     useEffect(
@@ -60,6 +60,7 @@ export const ReviewForm = () => {
 
     return (
         <form className="reviewForm">
+            <div className="review_container">
             <h2 className="comic_title">{comic.name}</h2>
             <h3 className="reviewForm__title">Write a Review</h3>
 
@@ -139,15 +140,16 @@ export const ReviewForm = () => {
                             }
 
                             createReview(review)
-                                .then(() => navigate(`/profile/${currentUserId}`))
+                                .then(() => navigate(`/collectors/${userId}`))
                         }}
                         className="btn btn-primary">Submit</button>
                         {/* } */}
                 <div className="abortReview_button_container">
-                    <button id="abort_review" onClick={() => navigate(`/comics/${comic.id}`)}>
+                    <button id="abort_review" onClick={() => navigate(`/comics/${comicId}`)}>
                         Back to Comic
                     </button>
                 </div>
+            </div>
             </div>
         </form>
     )

@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from 'react-router-dom'
-import { createReview, getReviewsById, updateReviewObj } from '../../managers/ReviewManager'
+import { createReview, getReviewsById, updateReviewObj, deleteReview } from '../../managers/ReviewManager'
 import { getComics } from "../../managers/ComicManager.js"
 import { Rating } from 'react-simple-star-rating'
 import { getSingleProfile } from "../../managers/ProfileManager"
+import './Review.css'
 
 
 export const ReviewUpdate = () => {
     let { comicId, reviewId } = useParams()
-    
+
     const navigate = useNavigate()
     const [comic, setComic] = useState([])
     // current user
-    const currentUserId = parseInt(localStorage.getItem('user_id'))
+    let userId = localStorage.getItem('userId')
     const [profile, setProfile] = useState({})
 
     const [currentReview, setCurrentReview] = useState({
@@ -29,7 +30,7 @@ export const ReviewUpdate = () => {
 
     useEffect(() => {
         getComics().then(data => setComic(data))
-        getSingleProfile(currentUserId).then(data => setProfile(data))
+        getSingleProfile(userId).then(data => setProfile(data))
     }, [])
 
     useEffect(
@@ -61,12 +62,13 @@ export const ReviewUpdate = () => {
 
     return (
         <form className="reviewForm">
-            <h2 className="comic_title">{comic.name}</h2>
-            <h3 className="reviewForm__title">Write a Review</h3>
+            <div className="review_container">
+            <h2 className="comic_title">{currentReview?.issue?.title}</h2>
+            <h3 className="reviewForm__title">Update Review</h3>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="review">My Review</label>
+                    <label htmlFor="review">My Review:</label>
                     <input type="text" name="review" required autoFocus className="form-control"
                         value={currentReview.review}
                         onChange={changeReviewState}
@@ -75,14 +77,14 @@ export const ReviewUpdate = () => {
             </fieldset>
 
             <fieldset>
-                <div className="form-group">    
+                <div className="form-group">
                     <label htmlFor="rating-label">
                         <strong>Rating:</strong>
                         <Rating
                             name="rating"
                             className="rating"
                             onClick={handleRating}
-                            initialValue={0}
+                            initialValue={currentReview.rating}
                             iconsCount={5}
                             fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
                             allowHalfIcon
@@ -109,7 +111,7 @@ export const ReviewUpdate = () => {
                             review.rating = review.rating / 20
                         }
                         updateReviewObj(review)
-                            .then(() => navigate(`/profiles/${review.id}`))
+                            .then(() => navigate(`/collectors/${userId}`))
                     }}>Save Changes</button>
                     :
 
@@ -125,14 +127,20 @@ export const ReviewUpdate = () => {
                             }
 
                             createReview(review)
-                                .then(() => navigate(`/profiles/${currentUserId}`))
+                                .then(() => navigate(`/collectors/${userId}`))
                         }}
                         className="btn btn-primary">Save</button>}
                 <div className="abortReview_button_container">
-                    <button id="abort_review" onClick={() => navigate(`/comics/${comic.id}`)}>
+                    <button id="abort_review" onClick={() => navigate(`/comics/${comicId}`)}>
                         Back to Comic
                     </button>
+                    <button className="button" onClick={() => {
+                        deleteReview(currentReview.id)
+                            .then(setCurrentReview)
+                            .then(navigate(`/comics/${comicId}`))
+                    }}>Delete</button>
                 </div>
+            </div>
             </div>
         </form>
     )

@@ -1,31 +1,43 @@
 import { Link, useNavigate } from "react-router-dom"
+import { Logo } from "./NavLogo"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FaMask, FaBook } from "react-icons/fa"
+import { MdOutlineLogout } from "react-icons/md"
 import "./NavBar.css"
 
 export const NavBar = () => {
     const navigate = useNavigate()
-    const currentUserId = parseInt(localStorage.getItem('lb_token'))
+    // const userId = parseInt(localStorage.getItem('lb_token'))
+    let userId = localStorage.getItem('userId')
 
-    return (
-        <ul className="navbar">
+    
+
+
+    return (<>
+        <ul className="navbar-menu">
+        <div class="logo">
+            <span className="icon-is-small"><Logo size={'1rem'}/></span>
+        </div>
             <li className="navbar__item">
-            <Link className="navbar__link" to={`/profiles/${currentUserId}`}>Profile</Link>
+            <Link className="navbar__link" to={`/collectors/${userId}`}><FaMask title='profile'/></Link>
             </li>
             <li className="navbar__item">
-            <Link className="navbar__link" to="/comics">Comics</Link>
+            <Link className="navbar__link" to="/comics"><FaBook title='comics'/></Link>
 
             </li>
             <li className="navbar__item">
-                Navigation link
+            {/* <Link className="navbar__link" to="/publishers">Publishers</Link> */}
+
             </li>
             {
                 (localStorage.getItem("lb_token") !== null) ?
-                    <li className="nav-item">
-                        <button className="nav-link fakeLink"
+                    <li className="navbar-item">
+                        <button className="nav-link-logout fakeLink"
                             onClick={() => {
                                 localStorage.removeItem("lb_token")
                                 navigate('/login')
                             }}
-                        >Logout</button>
+                        ><MdOutlineLogout title='logout'/></button>
                     </li> :
                     <>
                         <li className="nav-item">
@@ -36,5 +48,6 @@ export const NavBar = () => {
                         </li>
                     </>
             }        </ul>
+    </>
     )
 }

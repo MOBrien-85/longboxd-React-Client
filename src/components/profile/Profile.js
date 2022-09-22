@@ -1,19 +1,24 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { getSingleProfile } from "../../managers/ProfileManager"
-import { FaUserCircle } from 'react-icons/fa';
-import { getReviewsByUser } from "../../managers/ReviewManager";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FaUserCircle } from 'react-icons/fa'
+import "./Profile.css"
+
+
 
 export const ProfileDetails = () => {
     const { userId } = useParams()
-    let { comicId } = useParams()
-    const currentUserId = parseInt(localStorage.getItem('user_id'))
-    const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState([])
+    const [openTab, setOpenTab] = useState(1)
+    const navigate = useNavigate()
+
 
     useEffect(() => {
-        getSingleProfile(currentUserId).then(data => setProfile(data))
-    }, [])
+        getSingleProfile(userId).then(data => setProfile(data))
+
+    }, [userId])
 
     // const [newImg, setImg] = useState("")
 
@@ -29,11 +34,17 @@ export const ProfileDetails = () => {
     //     reader.readAsDataURL(file);
     // }
 
-    return (
-        <article className="profiles">
 
-            <section key={`profile--${profile.id}`} className="profile">
-                {/* <header>
+
+
+
+
+    return (
+
+        <article className="profiles">
+            <header className="profile-header">
+                <section key={`profile--${profile.id}`} className="profile">
+                    {/* <header>
                     {
                         profile.profile_image_url === ""
                             ? <figure className="media-left">
@@ -45,43 +56,117 @@ export const ProfileDetails = () => {
                     }
 
                 </header> */}
-                <div className="profile__fullName">{profile?.user?.first_name} {profile?.user?.last_name}</div>
-                {/* <div className="profile__collectorname">{collector?.collectorname}</div>
-                <div className="profile__email">{collector?.email}</div> */}
-                {/* <div className="profile__creationDate">{profile.user?.date_joined}</div>
-                <h3>Choose Profile Image:</h3>
-                <input type="file" id="game_image" name="action_pic" onChange={createImageString} />
-                <input type="hidden" name="game_id" value={profile.id} />
-                <button onClick={() => {
-                    editUserImage(profile, newImg)
-                        .then(() => getSingleProfile(profileId).then(data => setProfile(data)))
-                }}>Upload</button><br /> */}
+                    <div className="profile__username">@{profile?.user?.username}</div>
+                    <div className="profile__fullName">{profile?.user?.first_name} {profile?.user?.last_name}</div>
+
+                    <div className="profile__email">{profile?.user?.email}</div>
+                </section>
+            </header>
+            <hr />
+
+            <div class="tabs is-centered is-boxed">
+                <ul>
+                    <li class={openTab == 1 ? "tablinks is-active" : "tab-links"} onClick={() => {
+                        setOpenTab(1)
+                    }}>
+                        <a>
+                            <span className="tab_title">Reviews</span>
+                        </a>
+                    </li>
+                    <li class={openTab == 2 ? "tablinks is-active" : "tab-links"} onClick={() => {
+                        setOpenTab(2)
+                    }}>
+                        <a>
+                            <span className="tab_title">Collection</span>
+                        </a>
+                    </li>
+                    <li class={openTab == 3 ? "tablinks is-active" : "tab-links"} onClick={() => {
+                        setOpenTab(3)
+                    }}>
+                        <a>
+                            <span className="tab_title">Wishlist</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
 
-{/* this review area -- each review can be hovered over...the image of the comic will shift and/or create a drop
-shadow and you can click it to go see the review details */}
-                <section className="section">
-                    <div>{profile.user?.first_name}'s Reviews</div>
+
+            {openTab == 1 ?
+                <div id="reviews" class="tabcontent">
                     <article className="reviews">
                         {
                             profile.reviews?.map(review => {
                                 return <section key={`review--${review.id}`} className="review">
-                                    <div className="card">
+                                    {/* <div className="comic-box" onClick={
+                                        () => {
+                                            navigate(`/reviewupdate/${review?.issue}`)
+                                        }
+                                    }> */}
+                                        <header className="card-header is-justify-content-left">
+                                            <figure class="image is-128x128">
+                                                <img src={review?.issue?.cover_image} /></figure>
+                                        </header>
+                                    {/* </div> */}
+                                        <footer>
+                                            {review?.issue?.title}
+                                        </footer>
+                                </section>
+                            })
+                        }
+                    </article>
+                </div> : <></>
+            }
+
+            {openTab == 2 ?
+                <div id="collection" class="tabcontent">
+                    <article className="collection">
+                        {
+                            profile.collection?.map(collection => {
+                                return <section key={`collection--${collection.id}`} className="collection">
+                                    <div className="comic-box" onClick={
+                                        () => {
+                                            navigate(`/comics/${collection?.id}`)
+                                        }}>
                                         <header className="card-header is-justify-content-center">
-                                            {review.review}
+                                            <figure class="image is-128x128">
+                                                <img src={collection?.cover_image} /></figure>
                                         </header>
                                         <footer>
-                                            {/* star rating */}
+                                            {collection.title}
                                         </footer>
                                     </div>
                                 </section>
                             })
                         }
                     </article>
-                </section>
+                </div> : <></>
+            }
 
-            </section>
+            {openTab == 3 ?
+                <div id="wishlist" class="tabcontent">
+                    <article className="wishlist">
+                        {
+                            profile.wishlist?.map(wishlist => {
+                                return <section key={`wishlist--${wishlist.id}`} className="wishlist">
+                                     <div className="comic-box" onClick={
+                                        () => {
+                                            navigate(`/comics/${wishlist?.id}`)
+                                        }}>
+                                        <header className="card-header is-justify-content-center">
+                                            <figure class="image is-128x128">
+                                                <img src={wishlist?.cover_image} /></figure>
+                                        </header>
+                                        <footer>
+                                            {wishlist.title}
+                                        </footer>
+                                    </div>
+                                </section>
+                            })
+                        }
+                    </article>
+                </div> : <></>
+            }
         </article>
     )
-
 }

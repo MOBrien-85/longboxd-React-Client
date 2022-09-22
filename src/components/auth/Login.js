@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
+import { LongBoxdLogo } from "./Logo.js"
 import "./Auth.css"
 
 
@@ -20,7 +21,8 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem("lb_token", res.token)
-                    navigate("/")
+                    localStorage.setItem("userId", res.userId)
+                    navigate("/comics")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -36,7 +38,9 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Longboxd</h1>
+                    <div class="logo">
+                        <span className="icon-is-small"><LongBoxdLogo size={'1rem'} /></span>
+                    </div>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputUsername"> Username address </label>

@@ -1,0 +1,106 @@
+
+.image img {
+    margin: .6em;
+    min-height: 30px;
+    min-width: 0;
+    padding: 0.5em;
+    
+}
+
+.comics-detail {
+    margin-left: 100px;
+}
+
+.comic-header {
+    display: block;
+    flex-wrap: wrap;
+}
+
+.comic__title {
+    font-size: xx-large;
+    font-weight: 800;
+}
+
+.info_box {
+    margin-bottom: 2rem;
+}
+
+.detail_header {
+    font-size: large;
+    font-weight: 400;
+}
+
+.comic_info {
+    font-size: small;
+    font-weight: 400;
+}
+
+.comic-button-collection-add {
+    padding: 1rem;
+    font-size: 2rem;
+    color: goldenrod;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
+}
+
+.comic-button-collection-remove {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(218, 75, 32);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
+}
+
+.comic-button-wishlist-add {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(208, 111, 208);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
+}
+
+.comic-button-wishlist-remove {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(198, 54, 54);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
+}
+
+.comic-button-write-review {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(28, 255, 21);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+.comic-button-update-review {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(122, 107, 255);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+.divider {
+    width: 150%;
+}

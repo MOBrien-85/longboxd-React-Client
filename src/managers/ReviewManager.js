@@ -28,6 +28,18 @@ export const getReviewsByUser = (comic) => {
         .then(res => res.json())
 }
 
+// export const getUserReviews = (user) => {
+//     return fetch(`http://localhost:8000/reviews/${user}`, {
+//         method: "POST",
+//         headers: {
+//             'Authorization': `Token ${localStorage.getItem('lb_token')}`,
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(comic)
+//     })
+//         .then(res => res.json())
+// }
+
 export const createReview = (review) => {
     return fetch("http://localhost:8000/reviews", {
         method: "POST",

@@ -29,7 +29,8 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("lb_token", res.token)
-                        navigate("/")
+                        localStorage.setItem("userId", res.userId)
+                        navigate("/comics")
                     }
                 })
         } else {

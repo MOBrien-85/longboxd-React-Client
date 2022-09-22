@@ -1,0 +1,40 @@
+.profile-header {
+    margin-top: 100px;
+    margin-left: 100px;
+    
+}
+
+.profile__username {
+    font-size: xx-large;
+    font-weight: 800;
+}
+
+.profile__fullName {
+    font-size: medium;
+}
+
+.profile__email {
+    font-size: small;
+}
+
+/* .tabs {
+    background-image: linear-gradient(to bottom right,
+        rgb(53, 111, 187), rgb(30, 62, 103));
+    
+}
+
+span .hover {
+    color: white;
+} */
+
+.tablinks {
+    display: flex;
+    justify-content: center;
+}
+.tabcontent {
+    margin-left: 100px;
+}
+
+.tab_title {
+    color: black;
+}

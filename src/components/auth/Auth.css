@@ -52,6 +52,7 @@ fieldset {
     background-image: url('./long.png');
     z-index: 1;
     min-height: 10rem;
+    height: 50rem;
     min-width: 45rem;
     padding: 0 5rem;
     background-color: hsla(0,0%,100%,0.75);

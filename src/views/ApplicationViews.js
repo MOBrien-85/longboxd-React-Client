@@ -8,6 +8,7 @@ import { ComicDetail } from "../components/comic/ComicDetail"
 import { ReviewDetails } from "../components/review/ReviewDetail"
 import { ProfileDetails } from "../components/profile/Profile"
 import { ReviewUpdate } from "../components/review/ReviewUpdate"
+import { PublisherList } from "../components/publisher/PublisherList"
 
 export const ApplicationViews = () => {
     return <>
@@ -23,8 +24,11 @@ export const ApplicationViews = () => {
                 <Route path="/reviewdetails/:reviewId" element={<ReviewDetails />} />
                 <Route path="/reviewupdate/:comicId/:reviewId" element={<ReviewUpdate />} />
 
+                <Route path="/publishers" element={<PublisherList />} />
 
-                <Route path="/profiles/:userId" element={<ProfileDetails />} />
+
+
+                <Route path="/collectors/:userId" element={<ProfileDetails />} />
 
             </Route>
         </Routes>
