@@ -1,5 +1,52 @@
-.review_container {
-    margin-left: 100px;
+.reviewForm {
     margin-top: 50px;
 }
 
+.review_container {
+    margin-left: 100px;
+    padding-top: 100px;
+}
+
+.review_header {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.form-control {
+    /* width: 615px;
+    height: 316px; */
+    background-color: #cde;
+}
+
+.review-save-button {
+    padding: 1rem;
+    font-size: 2rem;
+    color: rgb(18, 201, 34);
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.back-button {
+    padding: 1rem;
+    font-size: 2rem;
+    color: goldenrod;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.delete-review-button {
+    padding: 1rem;
+    font-size: 2rem;
+    color:  rgb(218, 75, 32);
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}

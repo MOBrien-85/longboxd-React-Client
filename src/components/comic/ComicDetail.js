@@ -120,7 +120,7 @@ export const ComicDetail = () => {
                     </section>
                 </header>
                 <hr className="divider"/>
-                <section>
+                <section className="comic-info-area">
 
                 <div className="info_box">
                     <div className="detail_header">Synopsis:</div>

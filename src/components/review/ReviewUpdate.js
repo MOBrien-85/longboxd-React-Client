@@ -4,6 +4,9 @@ import { createReview, getReviewsById, updateReviewObj, deleteReview } from '../
 import { getComics } from "../../managers/ComicManager.js"
 import { Rating } from 'react-simple-star-rating'
 import { getSingleProfile } from "../../managers/ProfileManager"
+import { RiDeleteBinLine } from "react-icons/ri"
+import { AiOutlineRollback } from "react-icons/ai"
+import { FiSave } from "react-icons/fi"
 import './Review.css'
 
 
@@ -63,84 +66,83 @@ export const ReviewUpdate = () => {
     return (
         <form className="reviewForm">
             <div className="review_container">
-            <h2 className="comic_title">{currentReview?.issue?.title}</h2>
-            <h3 className="reviewForm__title">Update Review</h3>
+                <h2 className="comic_title">{currentReview?.issue?.title}</h2>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="review">My Review:</label>
-                    <input type="text" name="review" required autoFocus className="form-control"
-                        value={currentReview.review}
-                        onChange={changeReviewState}
-                    />
-                </div>
-            </fieldset>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="rating-label">
-                        <strong>Rating:</strong>
-                        <Rating
-                            name="rating"
-                            className="rating"
-                            onClick={handleRating}
-                            initialValue={currentReview.rating}
-                            iconsCount={5}
-                            fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
-                            allowHalfIcon
-                            transition
-                            value={currentReview.rating}
+                <fieldset>
+                    <div className="form-group">
+                        <strong htmlFor="review" className="review_header">My Review:</strong>
+                        <textarea type="text" name="review" required autoFocus className="form-control"
+                            value={currentReview.review}
                             onChange={changeReviewState}
                         />
-                    </label>
-                </div>
-            </fieldset>
+                    </div>
+                </fieldset>
 
-            <div className="reviewForm__button_container">
-                {comicId != undefined ? <button id="submit_updated_review"
-                    onClick={evt => {
-                        evt.preventDefault()
-                        const review = {
-                            id: currentReview.id,
-                            description: currentReview.review,
-                            rating: currentReview.rating,
-                            favorite: currentReview.favorite,
-                            issue: parseInt(comicId)
-                        }
-                        if (review.rating > 5) {
-                            review.rating = review.rating / 20
-                        }
-                        updateReviewObj(review)
-                            .then(() => navigate(`/collectors/${userId}`))
-                    }}>Save Changes</button>
-                    :
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="rating-label">
+                            <strong>Rating:</strong>
+                            <Rating
+                                name="rating"
+                                className="rating"
+                                onClick={handleRating}
+                                initialValue={currentReview.rating}
+                                iconsCount={5}
+                                fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
+                                allowHalfIcon
+                                transition
+                                value={currentReview.rating}
+                                onChange={changeReviewState}
+                            />
+                        </label>
+                    </div>
+                </fieldset>
 
-                    <button type="submit" id="submit_new_review"
+                <div className="reviewForm__button_container">
+                    {comicId != undefined ? <button className="review-save-button"
                         onClick={evt => {
                             evt.preventDefault()
-
                             const review = {
+                                id: currentReview.id,
                                 description: currentReview.review,
-                                rating: currentReview.rating / 20,
+                                rating: currentReview.rating,
                                 favorite: currentReview.favorite,
                                 issue: parseInt(comicId)
                             }
-
-                            createReview(review)
+                            if (review.rating > 5) {
+                                review.rating = review.rating / 20
+                            }
+                            updateReviewObj(review)
                                 .then(() => navigate(`/collectors/${userId}`))
-                        }}
-                        className="btn btn-primary">Save</button>}
-                <div className="abortReview_button_container">
-                    <button id="abort_review" onClick={() => navigate(`/comics/${comicId}`)}>
-                        Back to Comic
+                        }}><FiSave title='Save' /></button>
+                        :
+
+                        <button type="submit" className="review-save-button"
+                            onClick={evt => {
+                                evt.preventDefault()
+
+                                const review = {
+                                    description: currentReview.review,
+                                    rating: currentReview.rating / 20,
+                                    favorite: currentReview.favorite,
+                                    issue: parseInt(comicId)
+                                }
+
+                                createReview(review)
+                                    .then(() => navigate(`/collectors/${userId}`))
+                            }}
+                        ><FiSave title='Save' /></button>}
+
+                    <button className="back-button" onClick={() => navigate(`/comics/${comicId}`)}>
+                        <AiOutlineRollback title='Back to Comic' />
                     </button>
-                    <button className="button" onClick={() => {
+                    <button className="delete-review-button" onClick={() => {
                         deleteReview(currentReview.id)
                             .then(setCurrentReview)
                             .then(navigate(`/comics/${comicId}`))
-                    }}>Delete</button>
+                    }}><RiDeleteBinLine title='Delete' /></button>
                 </div>
-            </div>
             </div>
         </form>
     )

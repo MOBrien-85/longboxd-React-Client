@@ -69,21 +69,21 @@ export const ProfileDetails = () => {
                     <li class={openTab == 1 ? "tablinks is-active" : "tab-links"} onClick={() => {
                         setOpenTab(1)
                     }}>
-                        <a>
+                        <a className="tab">
                             <span className="tab_title">Reviews</span>
                         </a>
                     </li>
                     <li class={openTab == 2 ? "tablinks is-active" : "tab-links"} onClick={() => {
                         setOpenTab(2)
                     }}>
-                        <a>
+                        <a className="tab">
                             <span className="tab_title">Collection</span>
                         </a>
                     </li>
                     <li class={openTab == 3 ? "tablinks is-active" : "tab-links"} onClick={() => {
                         setOpenTab(3)
                     }}>
-                        <a>
+                        <a className="tab">
                             <span className="tab_title">Wishlist</span>
                         </a>
                     </li>
@@ -97,20 +97,16 @@ export const ProfileDetails = () => {
                     <article className="reviews">
                         {
                             profile.reviews?.map(review => {
-                                return <section key={`review--${review.id}`} className="review">
-                                    {/* <div className="comic-box" onClick={
-                                        () => {
-                                            navigate(`/reviewupdate/${review?.issue}`)
-                                        }
-                                    }> */}
-                                        <header className="card-header is-justify-content-left">
-                                            <figure class="image is-128x128">
+                                return <section key={`review--${review.id}`} className="review-list">
+                                    <div className="comic-box">
+                                            <figure class="image">
                                                 <img src={review?.issue?.cover_image} /></figure>
-                                        </header>
+                                        
                                     {/* </div> */}
                                         <footer>
                                             {review?.issue?.title}
                                         </footer>
+                                        </div>
                                 </section>
                             })
                         }
@@ -123,13 +119,13 @@ export const ProfileDetails = () => {
                     <article className="collection">
                         {
                             profile.collection?.map(collection => {
-                                return <section key={`collection--${collection.id}`} className="collection">
+                                return <section key={`collection--${collection.id}`} className="comic-collection">
                                     <div className="comic-box" onClick={
                                         () => {
                                             navigate(`/comics/${collection?.id}`)
                                         }}>
-                                        <header className="card-header is-justify-content-center">
-                                            <figure class="image is-128x128">
+                                        <header>
+                                            <figure class="image">
                                                 <img src={collection?.cover_image} /></figure>
                                         </header>
                                         <footer>
@@ -148,15 +144,14 @@ export const ProfileDetails = () => {
                     <article className="wishlist">
                         {
                             profile.wishlist?.map(wishlist => {
-                                return <section key={`wishlist--${wishlist.id}`} className="wishlist">
+                                return <section key={`wishlist--${wishlist.id}`} className="comic-wishlist">
                                      <div className="comic-box" onClick={
                                         () => {
                                             navigate(`/comics/${wishlist?.id}`)
                                         }}>
-                                        <header className="card-header is-justify-content-center">
-                                            <figure class="image is-128x128">
+                                            <figure class="image">
                                                 <img src={wishlist?.cover_image} /></figure>
-                                        </header>
+                                        
                                         <footer>
                                             {wishlist.title}
                                         </footer>

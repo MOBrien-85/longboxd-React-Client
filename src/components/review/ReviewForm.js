@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { createReview, getReviewsByUser, updateReviewObj } from '../../managers/ReviewManager'
 import { getComics } from "../../managers/ComicManager.js"
 import { Rating } from 'react-simple-star-rating'
+import { FiSave } from "react-icons/fi"
+import { AiOutlineRollback } from "react-icons/ai"
 import { getSingleProfile } from "../../managers/ProfileManager"
-
+import './Review.css'
 
 export const ReviewForm = () => {
     let { comicId } = useParams()
@@ -34,7 +36,7 @@ export const ReviewForm = () => {
     useEffect(
         () => {
             if (comicId != undefined) {
-                getReviewsByUser({comic: comicId})
+                getReviewsByUser({ comic: comicId })
                     .then(res => setCurrentReview({
                         id: res.id,
                         review: res.review,
@@ -61,72 +63,42 @@ export const ReviewForm = () => {
     return (
         <form className="reviewForm">
             <div className="review_container">
-            <h2 className="comic_title">{comic.name}</h2>
-            <h3 className="reviewForm__title">Write a Review</h3>
+                <h2 className="comic_title">{comic.name}</h2>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="review">My Review</label>
-                    <input type="text" name="review" required autoFocus className="form-control"
-                        value={currentReview.review}
-                        onChange={changeReviewState}
-                    />
-                </div>
-            </fieldset>
 
-            <fieldset>
-                <div className="form-group">    
-                    <label htmlFor="rating-label">
-                        <strong>Rating:</strong>
-                        <Rating
-                            name="rating"
-                            className="rating"
-                            onClick={handleRating}
-                            initialValue={0}
-                            iconsCount={5}
-                            fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
-                            allowHalfIcon
-                            transition
-                            value={currentReview.rating}
+                <fieldset>
+                    <div className="form-group">
+                        <strong htmlFor="review">My Review</strong>
+                        <input type="text" name="review" required autoFocus className="form-control"
+                            placeholder="Write a Review..."
+                            value={currentReview.review}
                             onChange={changeReviewState}
                         />
-                    </label>
-                </div>
-            </fieldset>
-            
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">R/V Parking?:</label>
-                    <input type="checkbox"
-                        value={review.rvParking}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...review }
-                                copy.rvParking = evt.target.checked
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset> */}
+                    </div>
+                </fieldset>
 
-            <div className="reviewForm__button_container">
-                {/* {comicId != undefined ? <button id="submit_updated_review"
-                    onClick={evt => {
-                        evt.preventDefault()
-                        const review = {
-                            id: currentReview.id,
-                            description: currentReview.review,
-                            rating: currentReview.rating,
-                            favorite: currentReview.favorite,
-                            issue: parseInt(comicId)
-                        }
-                        if (review.rating > 5) {
-                            review.rating = review.rating / 20
-                        }
-                        updateReviewObj(review)
-                            .then(() => navigate(`/profile/${review.id}`))
-                    }}>Save Changes</button>
-                    : */}
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="rating-label">
+                            <strong>Rating:</strong>
+                            <Rating
+                                name="rating"
+                                className="rating"
+                                onClick={handleRating}
+                                initialValue={0}
+                                iconsCount={5}
+                                fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
+                                allowHalfIcon
+                                transition
+                                value={currentReview.rating}
+                                onChange={changeReviewState}
+                            />
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div className="reviewForm__button_container">
+
 
                     <button type="submit" id="submit_new_review"
                         onClick={evt => {
@@ -142,14 +114,14 @@ export const ReviewForm = () => {
                             createReview(review)
                                 .then(() => navigate(`/collectors/${userId}`))
                         }}
-                        className="btn btn-primary">Submit</button>
-                        {/* } */}
-                <div className="abortReview_button_container">
-                    <button id="abort_review" onClick={() => navigate(`/comics/${comicId}`)}>
-                        Back to Comic
+                        className="review-save-button"><FiSave title='Submit Review' /></button>
+
+
+                    <button className="back-button" onClick={() => navigate(`/comics/${comicId}`)}>
+                        <AiOutlineRollback title='Back to Comic' />
                     </button>
+
                 </div>
-            </div>
             </div>
         </form>
     )

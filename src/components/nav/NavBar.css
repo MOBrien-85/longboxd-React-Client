@@ -19,7 +19,7 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 2rem;
-
+    margin-left: 0.55rem;
 }
 
 .navbar__link {
@@ -31,13 +31,14 @@
 
 .logo {
     padding: 0.25rem;
+    margin-left: 0.25rem;
 }
 
 .nav-link-logout {
     margin-top: 25rem;
     padding: 1rem;
     font-size: 2rem;
-    color: rgb(255, 0, 0);
+    color:  rgb(218, 75, 32);
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;

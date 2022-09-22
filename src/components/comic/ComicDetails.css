@@ -14,6 +14,7 @@
 .comic-header {
     display: block;
     flex-wrap: wrap;
+    padding-top: 50px;
 }
 
 .comic__title {
@@ -60,7 +61,7 @@
 .comic-button-wishlist-add {
     padding: 1rem;
     font-size: 2rem;
-    color: rgb(208, 111, 208);
+    color: rgb(201, 105, 242);
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
@@ -103,4 +104,8 @@
 
 .divider {
     width: 150%;
+}
+
+.comic-info-area {
+    padding-bottom: 50px;
 }
