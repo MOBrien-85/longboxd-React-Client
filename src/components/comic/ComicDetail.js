@@ -123,13 +123,13 @@ export const ComicDetail = () => {
                 <section className="comic-info-area">
 
                 <div className="info_box">
-                    <div className="detail_header">Synopsis:</div>
+                    <div className="detail_header"><strong>Synopsis:</strong></div>
                     <p className="comic_info">{comic.synopsis}</p>
                 </div>
 
                 <div className="info_box">
                     <div className="comic__creators">
-                        <ul className="detail_header">Creative Team:
+                        <ul className="detail_header"><strong>Creative Team:</strong>
                             {comic.credits?.map((credit, index) => (
                                 <li key={index}>
                                     <h4 className="comic_info">{credit.name}</h4>
@@ -141,14 +141,14 @@ export const ComicDetail = () => {
                 </div>
 
                 <div className="info_box">
-                    <div className="detail_header">Series:</div>
+                    <div className="detail_header"><strong>Series:</strong></div>
                     <p className="comic_info">{comic.series}</p>
                 </div>
 
 
                 <div className="info_box">
                     <div className="detail_header">
-                        <ul>Featuring:
+                        <ul><strong>Featuring:</strong>
                             {comic.characters?.map((character, index) => (
                                 <li key={index}>
                                     <h4 className="comic_info">{character.name}</h4>
@@ -160,7 +160,7 @@ export const ComicDetail = () => {
                 </div>
 
                 <div className="info_box">
-                    <div className="detail_header">Format: </div>
+                    <div className="detail_header"><strong>Format:</strong> </div>
                     <p className="comic_info">{comic.comic_type?.label}</p>
                 </div>
 

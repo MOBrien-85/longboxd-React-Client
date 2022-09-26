@@ -69,7 +69,7 @@ export const ReviewForm = () => {
                 <fieldset>
                     <div className="form-group">
                         <strong htmlFor="review">My Review</strong>
-                        <input type="text" name="review" required autoFocus className="form-control"
+                        <input type="text" name="review" required autoFocus className="form-control-review"
                             placeholder="Write a Review..."
                             value={currentReview.review}
                             onChange={changeReviewState}

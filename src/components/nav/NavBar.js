@@ -19,10 +19,10 @@ export const NavBar = () => {
             <span className="icon-is-small"><Logo size={'1rem'}/></span>
         </div>
             <li className="navbar__item">
-            <Link className="navbar__link" to={`/collectors/${userId}`}><FaMask title='profile'/></Link>
+            <Link className="navbar__link" to={`/collectors/${userId}`}><FaMask title='Profile'/></Link>
             </li>
             <li className="navbar__item">
-            <Link className="navbar__link" to="/comics"><FaBook title='comics'/></Link>
+            <Link className="navbar__link" to="/comics"><FaBook title='Comics'/></Link>
 
             </li>
             <li className="navbar__item">
@@ -37,7 +37,7 @@ export const NavBar = () => {
                                 localStorage.removeItem("lb_token")
                                 navigate('/login')
                             }}
-                        ><MdOutlineLogout title='logout'/></button>
+                        ><MdOutlineLogout title='Logout'/></button>
                     </li> :
                     <>
                         <li className="nav-item">

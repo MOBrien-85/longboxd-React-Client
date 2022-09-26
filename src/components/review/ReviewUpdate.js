@@ -72,7 +72,7 @@ export const ReviewUpdate = () => {
                 <fieldset>
                     <div className="form-group">
                         <strong htmlFor="review" className="review_header">My Review:</strong>
-                        <textarea type="text" name="review" required autoFocus className="form-control"
+                        <textarea type="text" name="review" required autoFocus className="form-control-review"
                             value={currentReview.review}
                             onChange={changeReviewState}
                         />

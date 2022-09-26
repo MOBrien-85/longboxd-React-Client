@@ -17,8 +17,8 @@
     font-size: small;
 }
 
-.tabs {
-    
+.tab {
+    color: pink;
     
 }
 
@@ -35,4 +35,5 @@
 
 .tab_title {
     color: rgb(40, 43, 46);
+    font-weight: bolder;
 }

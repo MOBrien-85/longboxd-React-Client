@@ -1,4 +1,5 @@
-.h1, h1 {
+.h1,
+h1 {
     font-size: 2.5rem;
 }
 
@@ -15,8 +16,8 @@ fieldset {
     text-align: left;
 }
 
-.form--login > fieldset > input[type="email"],
-.form--login > fieldset > input[type="password"] {
+.form--login>fieldset>input[type="email"],
+.form--login>fieldset>input[type="password"] {
     width: 25em;
 }
 
@@ -27,19 +28,19 @@ fieldset {
 
 .form-control {
     display: block;
-    width: 94%;
+    width: 75%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: #cde;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    -webkit-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .container--login {
@@ -55,9 +56,13 @@ fieldset {
     height: 50rem;
     min-width: 45rem;
     padding: 0 5rem;
-    background-color: hsla(0,0%,100%,0.75);
+    background-color: rgba(255, 255, 255, 0.266);
     background-blend-mode: overlay;
     background-repeat: no-repeat;
+}
+
+.login-content {
+    margin-top: 70px;
 }
 
 .button--close {
@@ -68,4 +73,28 @@ fieldset {
 .dialog {
     min-width: 15rem;
     min-height: 5rem;
+}
+
+.link--register {
+    bottom: 0;
+    color:aliceblue;
+}
+
+.btn {
+    padding-left: .25rem;
+    padding-top: 0rem;
+    bottom: 10px;
+    font-size: 2rem;
+    color:  rgb(0, 218, 25);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;  
+    top: 0;
+}
+
+.pw-login {
+    display: flex;
+    margin-top: 0.1rem;
 }

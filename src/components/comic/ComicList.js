@@ -30,7 +30,7 @@ export const ComicList = (props) => {
                                 navigate(`/comics/${comic.id}`)
                             }
                         }>
-                            <figure class="image ">
+                            <figure class="image">
                                 <img src={comic.cover_image} /></figure>
                             {comic.title} #{comic.issue_number}</div>
 

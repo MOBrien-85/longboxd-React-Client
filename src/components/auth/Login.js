@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../../managers/AuthManager"
 import { LongBoxdLogo } from "./Logo.js"
+import { MdOutlineLogin } from "react-icons/md"
 import "./Auth.css"
 
 
@@ -38,9 +39,10 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <div class="logo">
+                    {/* <div class="logo">
                         <span className="icon-is-small"><LongBoxdLogo size={'1rem'} /></span>
-                    </div>
+                    </div> */}
+                    <div className="login-content">
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputUsername"> Username address </label>
@@ -48,17 +50,16 @@ export const Login = () => {
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
+                        <div className="pw-login">
                         <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
+                        <button className="btn btn-1 btn-sep icon-send" type="submit"><MdOutlineLogin title='Sign In' /></button>
+                        </div>
                     </fieldset>
-                    <fieldset style={{
-                        textAlign: "center"
-                    }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
-                    </fieldset>
+                    </div>
                 </form>
-            </section>
             <section className="link--register">
                 <Link to="/register">Not a member yet?</Link>
+            </section>
             </section>
         </main>
     )

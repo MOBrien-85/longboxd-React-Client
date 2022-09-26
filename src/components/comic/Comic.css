@@ -12,9 +12,7 @@
     margin-left: -15px; */
 }
 
-.comic {
-    
-} 
+.comic {}
 
 
 
@@ -22,14 +20,38 @@
     margin-bottom: 1rem;
     min-height: 30px;
     min-width: 0;
-    padding: 0.5em;
+    /* padding: 0.5em; */
     object-fit: cover;
-    width: 215px;
-    height: 300px;
+    width: 246.95px;
+    height: 375px;
     margin: 0 !important;
     text-align: center;
     margin-left: 10%;
     display: inline;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 4px 7px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    /* width: 30%; */
+    will-change: transform;
+}
+
+
+.image img:disabled {
+    pointer-events: none;
+}
+
+.image img:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 12px 20px;
+    /* transform: translateY(-2px); */
+}
+
+.image img:active {
+    box-shadow: none;
+    transform: translateY(0);
 }
 
 .comic-box {
@@ -39,7 +61,7 @@
     font-size: 1rem;
     font-weight: 400;
     padding: 1rem;
-    
+
 }
 
 .collection {
